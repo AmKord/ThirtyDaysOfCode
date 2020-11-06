@@ -19,6 +19,7 @@ public class MinimumElement {
 			arr[i] = sc.nextInt();			
 			i++;
 		}
+		sc.close();
 		return arr;
 		
 	}
