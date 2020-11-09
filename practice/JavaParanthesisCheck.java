@@ -17,22 +17,46 @@ public class JavaParanthesisCheck extends JavaStack{
 		System.out.println(arr.toString());
 		
 		List<String> open = new ArrayList<>();
-		open.add("{");open.add("(");open.add("[");
+		open.add("{");
+		open.add("(");
+		open.add("[");
 		
 		List<String> closed = new ArrayList<>();
-		closed.add("}");closed.add(")");closed.add("]");
+		closed.add("}");
+		closed.add(")");
+		closed.add("]");
 		
-		for (int i=0;i<arr.length;i++) {
-			if(open.contains(String.valueOf(arr[i]))) {
+	    boolean flag = true;
+		
+	    for (int i=0;i<arr.length;i++) {
+			System.out.println("STACK: "+st.toString());
+			if (open.contains(String.valueOf(arr[i]))) {
 				st.push(String.valueOf(arr[i]));
-				System.out.println("Char: "+arr[i]);
+				//System.out.println("Char Open: " + arr[i]);
+			}
+
+			else {
+				if ( !st.empty() && closed.contains(String.valueOf(arr[i]))
+						&& open.indexOf(st.peek()) == closed.indexOf(String.valueOf(arr[i]))) {
+
+					st.pop();
+					//System.out.println("Char Closed: " + arr[i]);
+				} else {
+					//System.out.println("false");
+					flag = false;
+					break;
+				}
 			}
 			
-			else if(closed.contains(String.valueOf(arr[i]))) {
-				st.pop();
-				System.out.println("Char: "+arr[i]);
-			}
 		}
+		if(st.isEmpty()) {
+			System.out.println(flag);
+		}
+		else {
+			flag = false;
+			System.out.println(flag);
+		}
+		
 	}
 
 }
